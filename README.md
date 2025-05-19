@@ -169,6 +169,62 @@ echo "PMC7964769" > watch/batch1.txt
 
 The system will process the papers and create a `.processed` file with results.
 
+## 🌐 Deployed API Documentation
+
+The API is deployed and accessible at: http://20.193.148.209:9000
+
+You can interact with the deployed API using the following endpoints:
+
+1. **Health Check**: Verify the API is running
+2. **Get Database Statistics**: Retrieve information about the stored papers
+3. **Retrieve a Specific Paper**: Get data for a paper by its ID
+4. **Download Data in CSV Format**: Export paper data as CSV
+
+### Python Example
+
+Here's how to use the deployed API in Python:
+
+```python
+import requests
+
+# API base URL
+API_URL = "http://20.193.148.209:9000"
+API_KEY = "new-secure-key"  # Test API key
+
+# Headers for authentication
+headers = {
+    "X-API-Key": API_KEY
+}
+
+# Check API health
+health_response = requests.get(f"{API_URL}/health")
+print(f"API Health: {health_response.json()}")
+
+# Get database statistics
+stats_response = requests.get(f"{API_URL}/db-stats", headers=headers)
+print(f"Database Stats: {stats_response.json()}")
+
+# Get a specific paper
+paper_id = "PMC7964769"
+paper_response = requests.get(f"{API_URL}/papers/{paper_id}", headers=headers)
+paper_data = paper_response.json()
+print(f"Paper Title: {paper_data['title']}")
+
+# Download a paper's data in CSV format
+csv_response = requests.get(f"{API_URL}/papers/{paper_id}/csv", headers=headers)
+with open(f"{paper_id}.csv", "wb") as f:
+    f.write(csv_response.content)
+print(f"CSV saved to {paper_id}.csv")
+```
+
+### Important Notes
+
+- The API requires an API key for authentication (provided as X-API-Key header)
+- The current API key for testing is: `new-secure-key`
+- For production use, please request a dedicated API key
+- There are rate limits of 100 requests per hour
+- The server performs daily maintenance between 3-4 AM UTC
+
 ## 🏗️ Project Structure
 
 ```
