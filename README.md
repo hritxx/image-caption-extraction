@@ -221,14 +221,14 @@ import requests
 
 # Extract a paper
 requests.post(
-    "http://localhost:8000/extract",
+    "http://localhost:9000/extract",
     headers={"X-API-Key": "your-api-key"},
     json={"paper_ids": ["PMC7964769"]}
 )
 
 # Retrieve the paper
 paper = requests.get(
-    "http://localhost:8000/papers/PMC7964769",
+    "http://localhost:9000/papers/PMC7964769",
     headers={"X-API-Key": "your-api-key"}
 ).json()
 
@@ -281,4 +281,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
 # image-caption-extraction
