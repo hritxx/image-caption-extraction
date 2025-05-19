@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    ports:
+      - "9000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    environment:
+      - API_KEY=${API_KEY}
+      - STORAGE_TYPE=${STORAGE_TYPE:-duckdb}
+      - DUCKDB_PATH=${DUCKDB_PATH:-data/store.db}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - LOG_FILE=${LOG_FILE:-logs/api.log}
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+
+  batch-processor:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./watch:/app/watch
+      - ./logs:/app/logs
+    environment:
+      - API_KEY=${API_KEY}
+      - STORAGE_TYPE=${STORAGE_TYPE:-duckdb}
+      - DUCKDB_PATH=${DUCKDB_PATH:-data/store.db}
+      - WATCH_FOLDER=${WATCH_FOLDER:-watch}
+      - BATCH_SIZE=${BATCH_SIZE:-10}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - LOG_FILE=${LOG_FILE:-logs/batch.log}
+    command: python batch_processor.py
