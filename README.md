@@ -59,8 +59,8 @@ As an **Ops Person**:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/hritxx/paper-extractor.git
-cd paper-extractor
+git clone https://github.com/hritxx/image-caption-extraction.git
+cd image-caption-extraction
 ```
 
 2. Install dependencies:
@@ -87,8 +87,8 @@ python init_db.py
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/paper-extractor.git
-cd paper-extractor
+git clone https://github.com/hritxx/image-caption-extraction.git
+cd image-caption-extraction
 ```
 
 2. Configure environment variables in `.env`
